@@ -1,7 +1,8 @@
 import pytest
 
 @pytest.mark.smoke
-def test_TC_UM_012_delete_multiple_users(logged_in_admin, add_user_page, config, test_data):
+def test_TC_UM_012_delete_multiple_users(logged_in, logged_in_admin,
+                                         add_user_page, config, test_data):
     delete_user_list = []
     count = 0
     # Get existing username

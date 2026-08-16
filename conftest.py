@@ -1,7 +1,7 @@
 import pytest
 from pages.admin.admin_page import AdminPage
 from pages.admin.user_management.add_user_page import AddUserPage
-from pages.login_page import LoginPage
+from pages.login.login_page import LoginPage
 from utilities.config_reader import ConfigReader
 from utilities.driver_factory import create_driver
 import os
@@ -23,11 +23,15 @@ def browser_Instance(request):
     driver.quit()
 
 @pytest.fixture
-def logged_in_admin(login_page, admin_page, config):
+def logged_in(login_page, config):
     login_page.login(config.base_url, config.username, config.password)
-    assert login_page.is_home_page_loaded(), "Login failed"
+    assert login_page.is_home_page_loaded(), "Login failed — Dashboard not loaded"
+    return login_page
+
+@pytest.fixture
+def logged_in_admin(logged_in, admin_page):
     admin_page.navigate_to_admin()
-    assert "/admin/viewSystemUsers" in admin_page.is_admin_page_loaded()
+    assert "/admin/viewSystemUsers" in admin_page.is_admin_page_loaded(), "Admin page not loaded"
     return admin_page
 
 @pytest.fixture

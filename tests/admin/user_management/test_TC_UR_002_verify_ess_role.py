@@ -4,7 +4,7 @@ logger = get_logger(__name__)
 
 
 @pytest.mark.sanity
-def test_TC_UR_002_verify_ess_role(logged_in_admin, add_user_page, config, test_data):
+def test_TC_UR_002_verify_ess_role(logged_in, logged_in_admin, add_user_page, config, test_data):
     #Get existing username
     add_user_page.navigate_to_add_user()
 
