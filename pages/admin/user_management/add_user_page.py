@@ -404,32 +404,38 @@ class AddUserPage(BasePage):
 
     # ── Table Helpers ──
 
-    def verify_search_user_list(self, username_index, column_index, expected_value):
+    def verify_search_user_list(self, username_index, column_index, forbidden_value):
         """
-        Verify that all users in the search result contain
-        the expected value in the specified column.
+        Verify that no row in the search results contains the forbidden value
+        in the specified column.
 
-        :param username_index: Column index containing username
-        :param column_index: Column index to validate
-        :param expected_value: Expected value in the column
-        :return: List of usernames that do not match the expected value
+        Used to confirm that a role/status filter is working correctly —
+        pass the value that should NOT appear in the results.
+
+        Example: After searching by role 'Admin', pass forbidden_value='ESS'
+        to confirm no ESS user leaked into the results.
+
+        :param username_index: Column index containing the username (for error reporting)
+        :param column_index:   Column index to validate against the forbidden value
+        :param forbidden_value: The role/status value that must NOT appear in results
+        :return: List of usernames where the forbidden value was found (should be empty)
         """
         error_list = []
 
         # Step 1: Get all user table rows
         user_table = self.is_all_presence(self.search_user_table)
 
-        # Step 2: Validate the expected value for each row
+        # Step 2: Check each row for the forbidden value
         for role in user_table:
             value = role.find_element(By.XPATH, f"div/div[{str(column_index)}]/div").text
 
-            if value == expected_value:
+            if value == forbidden_value:
                 error_list.append(
                     role.find_element(By.XPATH, f"div/div[{str(username_index)}]/div").text
                 )
 
-        # Step 3: Return users that failed validation
-        logger.info(f"Users failing search validation: {len(error_list)}")
+        # Step 3: Return list of violating usernames (expected to be empty)
+        logger.info(f"Users with forbidden value '{forbidden_value}': {len(error_list)}")
         return error_list
 
     def get_searched_username(self, username_index, expected_value):
