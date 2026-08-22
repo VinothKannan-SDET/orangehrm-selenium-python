@@ -1,4 +1,6 @@
 {
+    "top_menu_name": "User Management",
+    "top_submenu_name": "Users",
     "user_role": "ESS",
     "employee_hint_name": "savina dulvin dulvin",
     "status": "Enabled",

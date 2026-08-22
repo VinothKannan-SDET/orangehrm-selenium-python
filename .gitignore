@@ -24,3 +24,11 @@ logs/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Virtual Environment files
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/

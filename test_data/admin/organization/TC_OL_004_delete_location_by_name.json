@@ -1,0 +1,6 @@
+{
+    "top_menu_name": "Organization",
+    "top_submenu_name": "Locations",
+    "location_url": "/admin/viewLocations",
+    "location_header": "Name"
+}

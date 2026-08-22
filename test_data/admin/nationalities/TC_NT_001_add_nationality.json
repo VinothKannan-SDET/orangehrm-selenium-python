@@ -1,0 +1,7 @@
+{
+    "top_menu_name": "Nationalities",
+    "nationalities_url": "/admin/nationality",
+    "save_nationality_url": "/admin/saveNationality",
+    "name": "Indian",
+    "national_header": "Nationality"
+}

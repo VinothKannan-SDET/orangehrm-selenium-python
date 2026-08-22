@@ -1,6 +1,6 @@
 {
-    "user_role": "Admin",
+    "top_menu_name": "User Management",
+    "top_submenu_name": "Users",
     "username_header": "Username",
-    "user_role_header": "User Role",
-    "status_header": "Status"
+    "user_role_header": "User Role"
 }

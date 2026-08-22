@@ -1,0 +1,11 @@
+{
+    "top_menu_name": "Organization",
+    "top_submenu_name": "Locations",
+    "location_url": "/admin/viewLocations",
+    "save_location_url": "/admin/saveLocation",
+    "name": "",
+    "city": "Chennai",
+    "country": "India",
+    "phone": "87653422",
+    "field_name" : "Name"
+}

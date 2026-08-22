@@ -1,4 +1,6 @@
 {
+    "top_menu_name": "User Management",
+    "top_submenu_name": "Users",
     "username_header": "Username",
     "user_deletion_count": 2
 }

@@ -1,4 +1,6 @@
 {
+    "top_menu_name": "User Management",
+    "top_submenu_name": "Users",
     "user_role": "Admin",
     "username_header": "Username",
     "user_role_header": "User Role",
