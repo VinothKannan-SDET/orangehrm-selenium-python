@@ -9,6 +9,17 @@ on:
     branches:
       - main
 
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: "Select browser"
+        required: true
+        default: firefox
+        type: choice
+        options:
+          - firefox
+          - chrome
+
 jobs:
   test:
 
@@ -31,4 +42,4 @@ jobs:
 
       - name: Run tests
         run: |
-          pytest
+          pytest --browser ${{ inputs.browser || 'firefox' }}
