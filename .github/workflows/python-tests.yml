@@ -48,6 +48,7 @@ jobs:
           pytest -n 4 --browser ${{ inputs.browser || 'firefox' }}
 
       - name: Check Allure results
+        if: always()
         run: |
           echo "Checking Allure results..."
-          ls -la allure-results
+          ls -la allure-results || true
