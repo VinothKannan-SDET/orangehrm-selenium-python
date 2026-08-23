@@ -46,3 +46,8 @@ jobs:
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
           pytest -n 4 --browser ${{ inputs.browser || 'firefox' }}
+
+      - name: Check Allure results
+        run: |
+          echo "Checking Allure results..."
+          ls -la allure-results
