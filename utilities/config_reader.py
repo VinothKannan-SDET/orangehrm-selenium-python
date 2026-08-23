@@ -1,4 +1,6 @@
+import os
 from configparser import ConfigParser
+from dotenv import load_dotenv
 
 
 class ConfigReader:
@@ -14,6 +16,8 @@ class ConfigReader:
         Initialize ConfigReader and load configuration
         from the application configuration file.
         """
+        # Load environment variables from .env
+        load_dotenv(override=True)
 
         # Step 1: Create ConfigParser instance
         self.config = ConfigParser()
@@ -32,7 +36,14 @@ class ConfigReader:
         """
 
         # Step 1: Read application URL from configuration
-        return self.config["application"]["url"]
+        base_url = os.getenv("BASE_URL")
+
+        if not base_url:
+            raise RuntimeError(
+                "BASE_URL environment variable is not configured."
+            )
+
+        return base_url
 
     @property
     def username(self):
@@ -43,7 +54,14 @@ class ConfigReader:
         """
 
         # Step 1: Read login username from configuration
-        return self.config["application"]["login_username"]
+        username = os.getenv("USERNAME")
+
+        if not username:
+            raise RuntimeError(
+                "USERNAME environment variable is not configured."
+            )
+
+        return username
 
     @property
     def password(self):
@@ -54,4 +72,11 @@ class ConfigReader:
         """
 
         # Step 1: Read login password from configuration
-        return self.config["application"]["login_password"]
+        password = os.getenv("PASSWORD")
+
+        if not password:
+            raise RuntimeError(
+                "PASSWORD environment variable is not configured."
+            )
+
+        return password
