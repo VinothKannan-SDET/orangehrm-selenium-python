@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utilities.logger import get_logger
@@ -42,7 +43,7 @@ class LoginPage(BasePage):
         self.logout_btn = (By.XPATH,"//a[normalize-space()='Logout']")
 
     # ── Login ──
-
+    @allure.step("Login to OrangeHRM")
     def login(self, login_URL, login_username, login_password):
         """
         Login to OrangeHRM using the supplied credentials.
@@ -68,7 +69,7 @@ class LoginPage(BasePage):
         self.click(self.login_btn)
 
     # ── Page Verification ──
-
+    @allure.step("OrangeHRM login page verification")
     def is_login_page_loaded(self):
         """
         Verify that the OrangeHRM Login page is displayed.
@@ -79,6 +80,7 @@ class LoginPage(BasePage):
         logger.info("Verifying Login page is loaded")
         return self.is_visible(self.login_form)
 
+    @allure.step("OrangeHRM home page verification")
     def is_home_page_loaded(self):
         """
         Verify that the OrangeHRM Dashboard page is displayed
@@ -91,7 +93,7 @@ class LoginPage(BasePage):
         return self.is_visible(self.dashboard_link)
 
     # ── Login Validation ──
-
+    @allure.step("Verify Invalid Credentials error message")
     def is_invalid_credentials_error_shown(self):
         """
         Verify that the Invalid Credentials error message
@@ -103,6 +105,7 @@ class LoginPage(BasePage):
         logger.info("Checking Invalid Credentials error message")
         return self.is_visible(self.invalid_credential)
 
+    @allure.step("Verify Empty Credentials error message")
     def is_empty_credentials_error_shown(self, field_name):
         """
         Get the validation error message displayed for an empty
@@ -125,6 +128,7 @@ class LoginPage(BasePage):
 
     # ── Logout ──
 
+    @allure.step("Logout from OrangeHRM")
     def logout(self):
         """
         Logout from OrangeHRM using the user profile dropdown.

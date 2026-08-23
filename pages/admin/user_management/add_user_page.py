@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utilities.logger import get_logger
@@ -123,7 +124,7 @@ class AddUserPage(BasePage):
         self.single_user_deletion = (By.XPATH,"//button[contains(normalize-space(),'Delete')]")
 
     # ── User Form Helpers ──
-
+    @allure.step("Select the employee: {employee_name}")
     def select_employee(self, employee_name):
         """
         Select an employee from the employee suggestion dropdown.
@@ -138,7 +139,7 @@ class AddUserPage(BasePage):
         self.click(employee_locator)
 
     # ── Navigation ──
-
+    @allure.step("Navigate to the add user page")
     def navigate_to_add_user(self):
         """
         Navigate to Admin > User Management > Users page.
@@ -151,7 +152,7 @@ class AddUserPage(BasePage):
         self.click(self.user_link)
 
     # ── Add User ──
-
+    @allure.step("Add user: {existing_username}")
     def add_user(self, test_data, existing_username=None):
         """
         Enter user details into the Add User form.
@@ -230,6 +231,7 @@ class AddUserPage(BasePage):
 
             self.enter_text(self.confirm_password,test_data["password"])
 
+    @allure.step("Click save button in User page")
     def click_save_btn(self):
         """
         Click the Save button to submit the Add User form.
@@ -239,7 +241,7 @@ class AddUserPage(BasePage):
         self.click(self.create_user)
 
     # ── Password Validation ──
-
+    @allure.step("Enter mismatch password")
     def password_mismatch(self, test_data):
         """
         Enter a different confirmation password to trigger
@@ -251,6 +253,7 @@ class AddUserPage(BasePage):
         logger.info("Entering mismatched password for validation")
         self.enter_text(self.password,test_data["password"] + "test")
 
+    @allure.step("Verify the password match")
     def get_password_mismatch_error(self):
         """
         Verify whether the password mismatch validation message
@@ -263,7 +266,7 @@ class AddUserPage(BasePage):
         return self.is_visible(self.password_not_match)
 
     # ── Success Validation ──
-
+    @allure.step("Verify the new user creation success message")
     def is_user_creation_success(self):
         """
         Verify that the success toast message is displayed
@@ -275,6 +278,7 @@ class AddUserPage(BasePage):
         logger.info("Verifying user creation success message")
         return self.is_visible(self.confirm_user_creation)
 
+    @allure.step("Verify the duplicate username error")
     def is_duplicate_username_error_shown(self):
         """
         Verify that the duplicate username validation message
@@ -288,7 +292,7 @@ class AddUserPage(BasePage):
         return self.is_visible(self.user_already_exist)
 
     # ── User Search ──
-
+    @allure.step("Search user: {username}")
     def search_user(self, username=None):
         """
         Search for a user by username.
@@ -309,6 +313,7 @@ class AddUserPage(BasePage):
         # Step 3: Click Search button
         self.click_search_btn()
 
+    @allure.step("Click Search button in user page")
     def click_search_btn(self):
         """
         Click the Search button on the User Management page.
@@ -320,6 +325,7 @@ class AddUserPage(BasePage):
         logger.info("Clicking Search button")
         self.click(self.search_btn)
 
+    @allure.step("Search user with user role: {test_data['user_role']}")
     def search_user_with_role_base(self, test_data):
         """
         Search users based on the selected User Role.
@@ -355,6 +361,7 @@ class AddUserPage(BasePage):
         # Step 2: Click Search button
         self.click_search_btn()
 
+    @allure.step("Search user with user status: {test_data['status']}")
     def search_user_with_status_base(self, test_data):
         """
         Search users based on the selected Status.
@@ -391,7 +398,7 @@ class AddUserPage(BasePage):
         self.click_search_btn()
 
     # ── Search Results ──
-
+    @allure.step("Get the first row user name")
     def verify_user_exact_search(self):
         """
         Return the username displayed in the first search result row.
@@ -403,7 +410,7 @@ class AddUserPage(BasePage):
         return self.get_text(self.search_first_row)
 
     # ── Table Helpers ──
-
+    @allure.step("Verify the expected user list displayed")
     def verify_search_user_list(self, username_index, column_index, forbidden_value):
         """
         Verify that no row in the search results contains the forbidden value
@@ -438,6 +445,7 @@ class AddUserPage(BasePage):
         logger.info(f"Users with forbidden value '{forbidden_value}': {len(error_list)}")
         return error_list
 
+    @allure.step("Get searched username")
     def get_searched_username(self, username_index, expected_value):
         """
         Return usernames from search results whose value does not
@@ -464,6 +472,7 @@ class AddUserPage(BasePage):
         # Step 3: Return users that do not match
         return error_list
 
+    @allure.step("Get user column value")
     def get_user_column_value(self, column_index):
         """
         Get the value from a specified column in the User table.
@@ -488,7 +497,7 @@ class AddUserPage(BasePage):
         return values[0] if values else None
 
     # ── Existing User ──
-
+    @allure.step("Get existing username")
     def get_existing_user(self):
         """
         Select and return a random existing username from
@@ -517,7 +526,7 @@ class AddUserPage(BasePage):
         return searched_text
 
     # ── Validation Helpers ──
-
+    @allure.step("Get the user field has empty value")
     def get_empty_user_fields(self, test_data):
         """
         Return a list of user fields that are empty in the
@@ -553,6 +562,7 @@ class AddUserPage(BasePage):
         # Step 6: Return the list of empty fields
         return empty_fields
 
+    @allure.step("Capture the error message")
     def get_validation_errors(self):
         """
         Get the field names for which Required validation
@@ -586,7 +596,7 @@ class AddUserPage(BasePage):
         return error_list
 
     # ── Delete User ──
-
+    @allure.step("Delete the user: {username}")
     def delete_single_user(self, username):
         """
         Delete a specific user from the User Management table.
@@ -616,7 +626,7 @@ class AddUserPage(BasePage):
         logger.info(f"User '{username}' deleted successfully")
 
     # ── Edit User ──
-
+    @allure.step("Click edit button of user details")
     def click_edit_btn(self):
         """
         Click the Edit icon for a user from the search result.
@@ -625,6 +635,7 @@ class AddUserPage(BasePage):
         logger.info("Clicking Edit button for user")
         self.click(self.edit_btn)
 
+    @allure.step("Edit the user details")
     def edit_user_data(self, column_name, change_value):
         """
         Update the selected user field with a new value.

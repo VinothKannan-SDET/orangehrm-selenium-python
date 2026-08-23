@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utilities.logger import get_logger
@@ -25,7 +26,7 @@ class AdminPage(BasePage):
         self.admin_link = (By.XPATH,"//span[normalize-space()='Admin']")
 
     # ── Navigation ──
-
+    @allure.step("Navigate to admin page")
     def navigate_to_admin(self):
         """
         Navigate to the Admin page from the main navigation menu.
@@ -46,7 +47,7 @@ class AdminPage(BasePage):
         self.wait_for_url("admin/viewSystemUsers")
 
     # ── Page Verification ──
-
+    @allure.step("Verify the Admin page is loaded")
     def is_admin_page_loaded(self):
         """
         Return the current page URL to verify that the Admin page

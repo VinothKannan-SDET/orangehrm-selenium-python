@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utilities.logger import get_logger
@@ -48,7 +49,7 @@ class LocationPage(BasePage):
             "//button[contains(normalize-space(),'Delete')]")
 
     # ── Navigation / Page Helpers ──
-
+    @allure.step("Get the current URL")
     def get_current_page_url(self):
         """
         Return the current page URL.
@@ -60,7 +61,7 @@ class LocationPage(BasePage):
         return self.get_current_url()
 
     # ── Add Location ──
-
+    @allure.step("Click Location add button")
     def click_location_add_btn(self):
         """
         Click the Add button on the Locations page
@@ -71,7 +72,7 @@ class LocationPage(BasePage):
         self.click(self.location_add_btn)
 
     # ── Success / Validation ──
-
+    @allure.step("Verify the location creation message")
     def is_location_creation_success(self):
         """
         Verify that the success toast message is displayed
@@ -83,6 +84,7 @@ class LocationPage(BasePage):
         logger.info("Verifying location success toast message")
         return self.is_visible(self.confirm_location_creation)
 
+    @allure.step("Verify the empty location message")
     def is_empty_location_error_shown(self, field_name):
         """
         Get the validation error message for a required field
@@ -104,7 +106,7 @@ class LocationPage(BasePage):
         )
 
     # ── Search / Table Helpers ──
-
+    @allure.step("Click Save / Search button for Location")
     def click_save_or_search_btn(self, btn_name):
         """
         Click a Save or Search submit button by its visible name.
@@ -121,6 +123,7 @@ class LocationPage(BasePage):
             )
         )
 
+    @allure.step("Get the location name")
     def get_searched_location(self, index):
         """
         Return the location value from the specified table column.

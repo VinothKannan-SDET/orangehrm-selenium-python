@@ -1,4 +1,6 @@
 import os
+
+import allure
 import pytest
 from pages.admin.admin_page import AdminPage
 from pages.admin.job.add_job_page import AddJobPage
@@ -9,6 +11,7 @@ from pages.login.login_page import LoginPage
 from utilities.config_reader import ConfigReader
 from utilities.driver_factory import create_driver
 from utilities.test_data_reader import TestDataReader
+
 
 
 def pytest_addoption(parser):
@@ -272,8 +275,15 @@ def pytest_runtest_makereport(item, call):
                 # Step 7: Capture screenshot of the failed test
                 driver.save_screenshot(screenshot_path)
 
+                # step 8: Attach the screenshot to the allure report
+                allure.attach.file(
+                    screenshot_path,
+                    name="Failure Screenshot",
+                    attachment_type=allure.attachment_type.PNG
+                )
+
             except Exception as e:
-                # Step 8: Report screenshot capture failure
+                # Step 9: Report screenshot capture failure
                 print(
                     f"Unable to capture screenshot: {e}"
                 )

@@ -1,3 +1,6 @@
 pytest
 selenium
 pytest-html
+python-dotenv
+pytest-xdist
+allure-pytest

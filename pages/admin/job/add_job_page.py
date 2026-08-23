@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utilities.logger import get_logger
@@ -48,6 +49,7 @@ class AddJobPage(BasePage):
 
     # ── Navigation ──
 
+    @allure.step("Navigate to Admin > Job > Job Titles")
     def navigate_to_add_title(self):
         """
         Navigate to Admin > Job > Job Titles page
@@ -62,6 +64,7 @@ class AddJobPage(BasePage):
 
     # ── Add Job Title ──
 
+    @allure.step("Click job title add button")
     def job_title_add_btn(self):
         """
         Click the Add button on the Job Titles list page
@@ -71,6 +74,7 @@ class AddJobPage(BasePage):
         logger.info("Clicking Add button on Job Titles page")
         self.click(self.job_title_add_button)
 
+    @allure.step("Enter Job Title details: {job_title}")
     def enter_job_title_details(self, job_title):
         """
         Enter the job title name into the form input field.
@@ -84,6 +88,7 @@ class AddJobPage(BasePage):
         logger.info(f"Entering job title: {job_title}")
         self.enter_text(self.job_title_name, job_title)
 
+    @allure.step("Clear job title input field")
     def clear_job_title_text(self):
         """
         Clear the existing text in the job title input field.
@@ -99,6 +104,7 @@ class AddJobPage(BasePage):
         logger.info("Clearing job title input field")
         self.clear_text(self.job_title_name)
 
+    @allure.step("Click button to save Job")
     def create_job_save_btn(self):
         """
         Click the Save button to submit the job title form.
@@ -110,6 +116,7 @@ class AddJobPage(BasePage):
 
     # ── Verification Helpers ──
 
+    @allure.step("Get list of job titles")
     def get_job_list_header_column(self, expected_column_name):
         """
         Find and return the column index number by matching
@@ -137,6 +144,7 @@ class AddJobPage(BasePage):
         logger.warning(f"Column header '{expected_column_name}' not found in table")
         return None
 
+    @allure.step("Verify newly created Job Title: {job_title_name}")
     def verify_new_job_creation(self, job_title_index, job_title_name):
         """
         Verify that the given job title exists in the Job Titles table.
@@ -161,6 +169,7 @@ class AddJobPage(BasePage):
         logger.warning(f"Job title '{job_title_name}' NOT found in list")
         return False
 
+    @allure.step("Get list of job titles")
     def get_job_title_list(self, job_title_index):
         """
         Return a list of all job title names from the table.
@@ -185,7 +194,7 @@ class AddJobPage(BasePage):
         return job_title_list
 
     # ── Edit Job Title ──
-
+    @allure.step("Edit Job Title: {job_title_name}")
     def edit_job_title(self, job_title_name):
         """
         Click the Edit (pencil) icon for the given job title
@@ -217,6 +226,7 @@ class AddJobPage(BasePage):
 
     # ── Delete Job Title ──
 
+    @allure.step("Delete the job title: {job_title_name}")
     def delete_job_title(self, job_title_name):
         """
         Click the Delete (trash) icon for the given job title
@@ -244,6 +254,7 @@ class AddJobPage(BasePage):
 
     # ── Success and Error Assertions ──
 
+    @allure.step("Verify the job title creation success")
     def is_job_creation_success(self):
         """
         Verify that the success toast message appears

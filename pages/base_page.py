@@ -320,7 +320,7 @@ class BasePage:
 
         # Step 3: Log a warning if the column was not found
         if return_index == 0:
-            logger.warning("Column '{column_header}' not found in table")
+            logger.warning(f"Column '{column_header}' not found in table")
 
         # Step 4: Return the column index
         return return_index

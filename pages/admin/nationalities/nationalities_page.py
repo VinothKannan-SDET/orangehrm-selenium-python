@@ -1,3 +1,4 @@
+import allure
 from selenium.webdriver.common.by import By
 from pages.base_page import BasePage
 from utilities.logger import get_logger
@@ -58,6 +59,7 @@ class NationalitiesPage(BasePage):
 
     # ── Navigation / Page Helpers ──
 
+    @allure.step("Get the current page URL")
     def get_current_page_url(self):
         """
         Return the current page URL.
@@ -70,6 +72,7 @@ class NationalitiesPage(BasePage):
 
     # ── Add Nationality ──
 
+    @allure.step("Click Nationality add button")
     def click_national_add_btn(self):
         """
         Click the Add button on the Nationalities page
@@ -79,6 +82,7 @@ class NationalitiesPage(BasePage):
         logger.info("Clicking Add button on Nationalities page")
         self.click(self.national_add_btn)
 
+    @allure.step("Enter nationality details: {nationality}")
     def enter_national_details(self, nationality):
         """
         Enter the nationality name into the Name input field.
@@ -100,6 +104,7 @@ class NationalitiesPage(BasePage):
             nationality
         )
 
+    @allure.step("Click save button to create nationality")
     def create_national_save_btn(self):
         """
         Click the Save button to submit the nationality form.
@@ -111,7 +116,7 @@ class NationalitiesPage(BasePage):
         self.click(self.nationality_save_btn)
 
     # ── Success / Validation ──
-
+    @allure.step("Verify the new nationality creation")
     def is_nationality_creation_success(self):
         """
         Verify that the success toast message is displayed
@@ -124,7 +129,7 @@ class NationalitiesPage(BasePage):
         return self.is_visible(self.confirm_nationality_creation)
 
     # ── Search / Table Helpers ──
-
+    @allure.step("Click Save / Search button for nationality")
     def click_save_or_search_btn(self, btn_name):
         """
         Click a Save or Search submit button by its visible name.
@@ -143,6 +148,7 @@ class NationalitiesPage(BasePage):
             )
         )
 
+    @allure.step("Location Search")
     def get_searched_location(self, index):
         """
         Return the nationality value from the specified table column.
@@ -161,6 +167,7 @@ class NationalitiesPage(BasePage):
             )
         )
 
+    @allure.step("Get nationality value from table column")
     def get_nationality_column_value(self, column_index):
         """
         Get the value from a specified column in the nationality table.
@@ -183,6 +190,7 @@ class NationalitiesPage(BasePage):
 
         return values[0] if values else None
 
+    @allure.step("Get list of nationality")
     def get_nationality_list(self, national_index):
         """
         Return a list of all nationality names displayed
@@ -213,7 +221,7 @@ class NationalitiesPage(BasePage):
         return national_list
 
     # ── Nationality Verification / Pagination ──
-
+    @allure.step("Verify the nationality: {national_name} presence in the table")
     def is_nationality_present(self, national_header_index, national_name):
         """
         Search all available nationality table pages and verify
@@ -256,7 +264,7 @@ class NationalitiesPage(BasePage):
                 return None
 
     # ── Edit Nationality ──
-
+    @allure.step("Edit the nationality: {national_name}")
     def edit_nationality(self, national_name):
         """
         Click the Edit icon for the specified nationality
