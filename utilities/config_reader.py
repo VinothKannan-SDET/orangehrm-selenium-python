@@ -32,15 +32,15 @@ class ConfigReader:
         """
         Return the OrangeHRM application base URL.
 
-        :return: Application URL configured in config.ini
+        :return: :return: Application URL configured through BASE_URL environment variable
         """
 
         # Step 1: Read application URL from configuration
-        base_url = os.getenv("BASE_URL")
+        base_url = self.config["application"]["url"]
 
         if not base_url:
             raise RuntimeError(
-                "BASE_URL environment variable is not configured."
+                "Application URL is not configured in config.ini."
             )
 
         return base_url
