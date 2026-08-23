@@ -26,6 +26,7 @@ def test_TC_NT_001_add_nationality(logged_in_admin, admin_page, nationalities_pa
     random_number = nationalities_page.get_random_number(111, 999)
     expected_national_name = (test_data["name"] + random_number)
 
+    # Step 6: Enter the Nationality name
     nationalities_page.enter_field_input("Name", expected_national_name)
 
     # Step 7: Click Save button to create the Nationality

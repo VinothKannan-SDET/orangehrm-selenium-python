@@ -54,7 +54,7 @@ class ConfigReader:
         """
 
         # Step 1: Read login username from configuration
-        username = os.getenv("USERNAME")
+        username = os.getenv("APP_USERNAME")
 
         if not username:
             raise RuntimeError(
@@ -72,7 +72,7 @@ class ConfigReader:
         """
 
         # Step 1: Read login password from configuration
-        password = os.getenv("PASSWORD")
+        password = os.getenv("APP_PASSWORD")
 
         if not password:
             raise RuntimeError(

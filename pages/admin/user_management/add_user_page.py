@@ -511,12 +511,12 @@ class AddUserPage(BasePage):
         logger.info(f"Total users available for selection: {len(search_locator)}")
 
         # Step 2: Generate a random row index
-        self.unique_name = self.get_random_number(1, len(search_locator))
+        random_index = self.get_random_number(1, len(search_locator))
 
         # Step 3: Get the username from the selected row
         searched_text = self.get_text((By.XPATH,
                 f"(//div[@class='oxd-table-card'])"
-                f"[{self.unique_name}]/div/div[2]/div"
+                f"[{random_index}]/div/div[2]/div"
             )
         )
 

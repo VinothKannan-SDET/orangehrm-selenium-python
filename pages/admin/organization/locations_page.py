@@ -41,13 +41,6 @@ class LocationPage(BasePage):
         self.search_header_column = (By.XPATH,
             "//div[@class='oxd-table-header']/div/div")
 
-        # ── Delete Confirmation Dialog Locators ──
-        self.user_delete_msg_box = (By.XPATH,
-            "//p[normalize-space()='Are you Sure?']")
-
-        self.single_user_deletion = (By.XPATH,
-            "//button[contains(normalize-space(),'Delete')]")
-
     # ── Navigation / Page Helpers ──
     @allure.step("Get the current URL")
     def get_current_page_url(self):
