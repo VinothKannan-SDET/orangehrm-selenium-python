@@ -45,4 +45,4 @@ jobs:
           USERNAME: ${{ secrets.USERNAME }}
           PASSWORD: ${{ secrets.PASSWORD }}
         run: |
-          pytest --browser ${{ inputs.browser || 'firefox' }}
+          pytest -n 4 --browser ${{ inputs.browser || 'firefox' }}
