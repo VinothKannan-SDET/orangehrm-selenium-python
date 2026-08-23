@@ -26,8 +26,8 @@ permissions:
   id-token: write
 
 jobs:
-  test:
 
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -56,10 +56,24 @@ jobs:
         run: |
           pytest -n 4 --browser ${{ inputs.browser || 'firefox' }}
 
+      - name: Check Allure results
+        if: always()
+        run: |
+          echo "Checking Allure results..."
+          ls -la allure-results || true
+
       - name: Generate Allure HTML report
         if: always()
         run: |
           allure generate allure-results -o allure-report --clean
+
+      - name: Upload Allure results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-results
+          path: allure-results/
+          if-no-files-found: warn
 
       - name: Upload Allure HTML report
         if: always()
@@ -75,16 +89,17 @@ jobs:
         with:
           path: allure-report/
 
-      - name: Check Allure results
-        if: always()
-        run: |
-          echo "Checking Allure results..."
-          ls -la allure-results || true
+  deploy:
+    if: always() && needs.test.result != 'cancelled'
+    needs: test
+    runs-on: ubuntu-latest
 
-      - name: Upload Allure results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-results
-          path: allure-results/
-          if-no-files-found: warn
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+
+      - name: Deploy Allure report to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
