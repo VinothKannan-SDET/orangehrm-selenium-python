@@ -58,7 +58,7 @@ class ConfigReader:
 
         if not username:
             raise RuntimeError(
-                "USERNAME environment variable is not configured."
+                "APP_USERNAME environment variable is not configured."
             )
 
         return username
@@ -76,7 +76,7 @@ class ConfigReader:
 
         if not password:
             raise RuntimeError(
-                "PASSWORD environment variable is not configured."
+                "APP_PASSWORD environment variable is not configured."
             )
 
         return password
